@@ -47,14 +47,14 @@ sudo apt-get upgrade
 
 ### Step 4: Install the dependencies
 
-# Install python and pip
+#### Install python and pip
 
 ```
 sudo apt-get install python-minimal
 sudo apt install python-pip
 ```
 
-# Setup virtualenv
+#### Setup virtualenv
 
 ```
 pip install virtualenv
@@ -64,14 +64,14 @@ source venv/bin/activate
 
 - Deactivate the virtual environment: deactivate
 
-# Install nginx
+#### Install nginx
 
 ```
 sudo apt-get install nginx
 sudo ufw allow 'Nginx HTTP'
 ```
 
-# Nginx configuration
+#### Nginx configuration
 
 - added a proxy for port 5000 in /etc/nginx/sites-available/default
   location / {
