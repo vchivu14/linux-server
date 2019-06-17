@@ -27,6 +27,7 @@ In this project we will use:
 - Write a name for your instance.
 - Click `Create`.
 - Wait for the instance to start up.
+
 **Reference**
 Udacity, [Web Application Servers](https://classroom.udacity.com/nanodegrees/nd004/parts/b2de4bd4-ef07-45b1-9f49-0e51e8f1336e/modules/56cf3482-b006-455c-8acd-26b37b6458d2/lessons/4340119836/concepts/48089485480923).
 
