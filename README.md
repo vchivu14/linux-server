@@ -12,7 +12,6 @@ In this project we will use:
 - The Linux distribution [Ubuntu](https://www.ubuntu.com/download/server) 16.04.
 - The virtual private server [Amazon Lighsail](https://lightsail.aws.amazon.com/).
 - The web application that can be found here: [Threads project](https://github.com/vchivu14/threads).
-- The database server [PostgreSQL](https://www.postgresql.org/).
 - [Vagrant](https://www.vagrantup.com/), [VirtualBox](https://www.virtualbox.org/) and [Git](https://git-scm.com/).
 - My local machine that is using Microsoft Windows 10.
 
@@ -35,7 +34,9 @@ Udacity, [Web Application Servers](https://classroom.udacity.com/nanodegrees/nd0
 
 - From the `Account` menu on Amazon Lightsail, click on `SSH keys` tab and download the Default Private Key.
 - Move the private key file into the folder `~/.ssh` and rename it as you wish, I renamed it `grader`.
-- In your terminal, type this command: `chmod 600 ~/.ssh/grader`.
+- In your terminal, type these commands: 
+* `chmod 700 ~/.ssh/grader`
+* `chmod 644 /home/grader/.ssh/authorized_keys`
 - To connect to the instance from the terminal: `ssh -i ~/.ssh/(your key) -p 22 ubuntu@(your public IP address)`, in my case `ssh -i ~/.ssh/grader.pem ubuntu@34.215.80.168`.
 
 ### Step 3: Update and upgrade installed packages
@@ -73,13 +74,41 @@ sudo ufw allow 'Nginx HTTP'
 
 #### Nginx configuration
 
-- added a proxy for port 5000 in /etc/nginx/sites-available/default
-  location / {
-  proxy_pass http://localhost:5000/;
-  }
-- `pip install`
+- pip install
+```
+pip install
+pip install gunicorn
+```
 - Navigate to `/home/ubuntu/` directory.
 - And then `git clone https://github.com/vchivu14/threads`.
+- Nginx + wsgi configuration:
+* Modified `/etc/systemd/system/threads.service` in order to create a system service that runs the wsgi app with gunicorn, which also starts at boot time.
+* [Unit]
+`Description=Gunicorn instance to serve threads`
+`After=network.target`
+* [Service]
+`User=grader`
+`Group=www-data`
+`WorkingDirectory=/home/ubuntu/threads`
+`Environment="PATH=/home/ubuntu/threads/venv/bin"`
+`ExecStart=/home/ubuntu/threads/venv/bin/gunicorn --workers 2 --bind unix:/home/ubuntu/threads/run/threads.sock -m 007 wsgi:app`
+* [Install]
+`WantedBy=multi-user.target`
+* Enable and start service:
+`sudo systemctl start threads`
+`sudo systemctl enable threads`
+* Create wsgi entry point
+`from threadsPlainFinal import app`
+* In nginx config file, proxy requests to the wsgi entry point server_name 34.215.80.168.xip.io, www.34.215.80.168.xip.io;
+* location / {
+    include proxy_params;
+    proxy_pass http://unix:/home/ubuntu/threads/run/threads.sock;
+}
+* `gunicorn wsgi:app --bind=unix:/home/ubuntu/threads/run/threads.sock`
+
+**Reference**
+[`how to setup Nginx`]https://www.linode.com/docs/web-servers/nginx/how-to-configure-nginx/
+[`set gunicorn and Nginx`]https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04
 
 ### Step 4: Change the SSH port from 22 to 2200
 
@@ -162,17 +191,12 @@ Official Ubuntu Documentation, [UFW - Uncomplicated Firewall](https://help.ubunt
 - Change the timezone to UTC using following command:
   `sudo timedatectl set-timezone UTC`.
 
-### Step 9: Configure mod_wsgi application
-
-- Install the Python mod_wsgi package: `sudo apt-get install libapache2-mod-wsgi-py`
-- Enable mod_wsgi using: `sudo a2enmod wsgi`
-
-### Step 10: Create a new user named `grader`
+### Step 9: Create a new user named `grader`
 
 - While logged in as `ubuntu`, add user: `sudo adduser grader`.
 - Enter a password (twice) and fill out information for this new user.
 
-### Step 11: Give `grader` the permission to sudo
+### Step 10: Give `grader` the permission to sudo
 
 - Edits the sudoers file: `sudo visudo`.
 - Search for the line that looks like this:
@@ -198,19 +222,22 @@ Official Ubuntu Documentation, [UFW - Uncomplicated Firewall](https://help.ubunt
 **Reference**
 DigitalOcean, [How To Add and Delete Users on an Ubuntu 14.04 VPS](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
 
-### Step 12: SSH key pair for `grader`
+### Step 11: SSH key pair for `grader`
 
 - While logged in as `grader`
 - Create a new directory called `~/.ssh` (`mkdir .ssh`)
-- Copy the contents of the private key `grader` in `~/.ssh/authorized_keys`
-- Give the permissions: `chmod 700 .ssh` and `chmod 644 .ssh/authorized_keys`
+- Copy the contents of the private key `grader` in `~/.ssh/authorized_keys`, create the folder if you don't have it.
+- Give the permissions:
+* `chown -R  grader.grader /home/grader/.ssh`
+* `chmod 700 /home/grader/.ssh`
+* `chmod 600 /home/grader/.ssh/authorized_keys`
 - Restart SSH: `sudo service ssh restart`
 - Connect again with `ssh -i ~/.ssh/grader.pem -p 2200 grader@34.215.80.168`
 
 **Reference**
 DigitalOcean, [How To Set Up SSH Keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2).
 
-### Step 13: Authenticate login through Google
+### Step 12: Authenticate login through Google
 
 - Go to [Google Cloud Plateform](https://console.cloud.google.com/).
 - Click `APIs & services` on left menu.
@@ -223,8 +250,8 @@ DigitalOcean, [How To Set Up SSH Keys](https://www.digitalocean.com/community/tu
 - Download the corresponding JSON file and replace it in the project `/home/ubuntu/threads/client_secret.json`
 - Replace the client ID in the `templates/login.html` file.
 
-### Step 14: start the web application
+### Step 13: start the web application
 
-- Activate the environment with: `source venv/bin/activate`
-- Start the app with: `python threadsPlainFinal.py`
+- Activate the environment with: `source /home/ubuntu/threads/venv/bin/activate`
+- Start the app with: `python -i /home/ubuntu/threads/threadsPlainFinal.py`
 - Access at http://34.215.80.168.xip.io/
