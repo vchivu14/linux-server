@@ -137,8 +137,8 @@ sudo ufw allow 'Nginx HTTP'
   Custom TCP 2200
 - SSH with:
   `ssh -i ~/.ssh/grader.pem -p 2200 ubuntu@34.215.80.168`
-  **Reference**
-- Official Ubuntu Documentation, [UFW - Uncomplicated Firewall](https://help.ubuntu.com/community/UFW).
+**Reference**
+Official Ubuntu Documentation, [UFW - Uncomplicated Firewall](https://help.ubuntu.com/community/UFW).
 
 ### Step 7: Use `Fail2Ban` to ban attackers
 
@@ -192,8 +192,8 @@ sudo ufw allow 'Nginx HTTP'
   User grader may run the following commands on ip-172-26-13-170.us-east-2.compute.internal:
       (ALL : ALL) ALL
   ```
-  **Reference**
-- DigitalOcean, [How To Add and Delete Users on an Ubuntu 14.04 VPS](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
+**Reference**
+DigitalOcean, [How To Add and Delete Users on an Ubuntu 14.04 VPS](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
 
 ### Step 12: SSH key pair for `grader`
 
@@ -213,8 +213,8 @@ sudo ufw allow 'Nginx HTTP'
 - Click `Credentials`.
 - Create an OAuth Client ID (under the Credentials tab), and add http://34.215.80.168.xip.io as authorized JavaScript origins.
 - Add as authorized redirect URI:
-  http://34.215.80.168.xip.io/oauth2callback
-  http://34.215.80.168.xip.io/login
+  http://34.215.80.168.xip.io/oauth2callback,
+  http://34.215.80.168.xip.io/login and
   http://34.215.80.168.xip.io/gconnect
 - Download the corresponding JSON file and replace it in the project `/home/ubuntu/threads/client_secret.json`
 - Replace the client ID in the `templates/login.html` file.
