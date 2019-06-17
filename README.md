@@ -27,8 +27,8 @@ In this project we will use:
 - Write a name for your instance.
 - Click `Create`.
 - Wait for the instance to start up.
-  **Reference**
-- Udacity, [Web Application Servers](https://classroom.udacity.com/nanodegrees/nd004/parts/b2de4bd4-ef07-45b1-9f49-0e51e8f1336e/modules/56cf3482-b006-455c-8acd-26b37b6458d2/lessons/4340119836/concepts/48089485480923).
+**Reference**
+Udacity, [Web Application Servers](https://classroom.udacity.com/nanodegrees/nd004/parts/b2de4bd4-ef07-45b1-9f49-0e51e8f1336e/modules/56cf3482-b006-455c-8acd-26b37b6458d2/lessons/4340119836/concepts/48089485480923).
 
 ### Step 2: SSH into the server
 
@@ -203,8 +203,8 @@ DigitalOcean, [How To Add and Delete Users on an Ubuntu 14.04 VPS](https://www.d
 - Give the permissions: `chmod 700 .ssh` and `chmod 644 .ssh/authorized_keys`
 - Restart SSH: `sudo service ssh restart`
 - Connect again with `ssh -i ~/.ssh/grader.pem -p 2200 grader@34.215.80.168`
-  **Reference**
-- DigitalOcean, [How To Set Up SSH Keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2).
+**Reference**
+DigitalOcean, [How To Set Up SSH Keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2).
 
 ### Step 13: Authenticate login through Google
 
