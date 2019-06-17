@@ -138,6 +138,7 @@ sudo ufw allow 'Nginx HTTP'
   Custom TCP 2200
 - SSH with:
   `ssh -i ~/.ssh/grader.pem -p 2200 ubuntu@34.215.80.168`
+
 **Reference**
 Official Ubuntu Documentation, [UFW - Uncomplicated Firewall](https://help.ubuntu.com/community/UFW).
 
@@ -193,6 +194,7 @@ Official Ubuntu Documentation, [UFW - Uncomplicated Firewall](https://help.ubunt
   User grader may run the following commands on ip-172-26-13-170.us-east-2.compute.internal:
       (ALL : ALL) ALL
   ```
+
 **Reference**
 DigitalOcean, [How To Add and Delete Users on an Ubuntu 14.04 VPS](https://www.digitalocean.com/community/tutorials/how-to-add-and-delete-users-on-an-ubuntu-14-04-vps)
 
@@ -204,6 +206,7 @@ DigitalOcean, [How To Add and Delete Users on an Ubuntu 14.04 VPS](https://www.d
 - Give the permissions: `chmod 700 .ssh` and `chmod 644 .ssh/authorized_keys`
 - Restart SSH: `sudo service ssh restart`
 - Connect again with `ssh -i ~/.ssh/grader.pem -p 2200 grader@34.215.80.168`
+
 **Reference**
 DigitalOcean, [How To Set Up SSH Keys](https://www.digitalocean.com/community/tutorials/how-to-set-up-ssh-keys--2).
 
