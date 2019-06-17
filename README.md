@@ -227,3 +227,4 @@ DigitalOcean, [How To Set Up SSH Keys](https://www.digitalocean.com/community/tu
 
 - Activate the environment with: `source venv/bin/activate`
 - Start the app with: `python threadsPlainFinal.py`
+- Access at http://34.215.80.168.xip.io/
