@@ -103,8 +103,12 @@ pip install gunicorn
 * `gunicorn wsgi:app --bind=unix:/home/ubuntu/threads/run/threads.sock`
 
 **Reference**
-[how to setup Nginx]https://www.linode.com/docs/web-servers/nginx/how-to-configure-nginx/
-[set gunicorn and Nginx]https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04
+<ol>
+    <li>how to setup Nginx</li>
+        https://www.linode.com/docs/web-servers/nginx/how-to-configure-nginx/ 
+    <li>set gunicorn and Nginx</li>
+        https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-18-04
+</ol>
 
 ### Step 4: Change the SSH port from 22 to 2200
 
