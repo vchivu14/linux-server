@@ -1,6 +1,6 @@
 # Linux Server Configuration
 
-## Project Overview:
+## Project Overviews:
 
 In this final project we will learn how to set up Linux distribution on a virtual machine and install and configure a web server to host our application.
 
