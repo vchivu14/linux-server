@@ -1,4 +1,4 @@
-# Linux Server Configuration
+# Linux Server Configuratio
 
 ## Project Overview:
 
