@@ -2,11 +2,11 @@
 
 ## Project Overview:
 
-In this final project we will learn hot to set up Linux distribution on a virtual machine and install and configure a web and database server to host our application.
+In this final project we will learn how to set up Linux distribution on a virtual machine and install and configure a web server to host our application.
 
 ## Project Description
 
-This application we're building will allow authenticated users to post a cause they believe needs attention from the public and then let users come and respond with possible solutions. Users will be the only ones in charge of their content with the possibility to update and delete their posts. The website is open for reading to anyone but you must login to at least post an idea or respond to one.
+This application we're building will allow authenticated users to post a CAUSE they believe needs attention from the public authorities and then let users come and respond with possible SOLUTIONS. Users will be the only ones in charge of their content with the possibility to update and delete their posts. The website is open for reading to anyone but you must login to post a cause or respond to one.
 In this project we will use:
 
 - The Linux distribution [Ubuntu](https://www.ubuntu.com/download/server) 16.04.
@@ -63,8 +63,6 @@ virtualenv venv
 source venv/bin/activate
 ```
 
-- Deactivate the virtual environment: deactivate
-
 #### Install nginx
 
 ```
@@ -74,15 +72,13 @@ sudo ufw allow 'Nginx HTTP'
 
 #### Nginx configuration
 
-- pip install
 ```
-pip install
 pip install gunicorn
 ```
 - Navigate to `/home/ubuntu/` directory.
 - And then `git clone https://github.com/vchivu14/threads`.
 - Nginx + wsgi configuration:
-* Modified `/etc/systemd/system/threads.service` in order to create a system service that runs the wsgi app with gunicorn, which also starts at boot time.
+* Modify `/etc/systemd/system/threads.service` in order to create a system service that runs the wsgi app with gunicorn, which also starts at boot time.
 * [Unit]
 `Description=Gunicorn instance to serve threads`
 `After=network.target`
