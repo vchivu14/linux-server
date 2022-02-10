@@ -3,7 +3,7 @@
 ## Project Overview:
 
 In this final project we will learn how to set up Linux distribution on a virtual machine and install and configure a web server to host our application.
-
+ 
 ## Project Description
 
 This application we're building will allow authenticated users to post a CAUSE they believe needs attention from the public authorities and then let users come and respond with possible SOLUTIONS. Users will be the only ones in charge of their content with the possibility to update and delete their posts. The website is open for reading to anyone but you must login to post a cause or respond to one.
